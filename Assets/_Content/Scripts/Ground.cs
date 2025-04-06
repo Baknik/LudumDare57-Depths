@@ -24,16 +24,22 @@ public class Ground : MonoBehaviour
     [Header("Settings")]
     public float DeepGroundTileHeight;
     public float StartYGenerationPosition;
+    public float XIncrementSize;
     public int NumDeepGroundLayers;
+    public int IterationsBetweenNarrows;
+    public float MinX;
+    public float MaxX;
 
     private float _xGenerationPosition;
     private float _yGenerationPosition;
+    private int _iterationsSinceLastNarrow;
     private Dictionary<DeepGroundTileType, Transform> DeepGroundPrefabDictionary;
 
     private void Start()
     {
         _xGenerationPosition = 0f;
         _yGenerationPosition = StartYGenerationPosition;
+        _iterationsSinceLastNarrow = 0;
 
         DeepGroundPrefabDictionary = new Dictionary<DeepGroundTileType, Transform>();
         DeepGroundPrefabDictionary[DeepGroundTileType.Narrow] = NarrowWidthDeepGround;
@@ -47,20 +53,40 @@ public class Ground : MonoBehaviour
     private void GenerateDeepGround()
     {
         PlaceDeepGroundTile(DeepGroundTileType.Normal);
-        IncrementYGenerationDepth();
+        RandomlyIncrementXGenerationPosition();
+        IncrementYGenerationPosition();
 
         for (int i=0; i<NumDeepGroundLayers - 1; i++)
         {
-            var randomTileType = RandomlySelectDeepGroundTileType();
-            PlaceDeepGroundTile(randomTileType);
-            IncrementYGenerationDepth();
+            if (_iterationsSinceLastNarrow >= IterationsBetweenNarrows)
+            {
+                _iterationsSinceLastNarrow = 0;
+                var randomTileType = RandomlySelectDeepGroundTileType();
+                PlaceDeepGroundTile(randomTileType);
+            }
+            else
+            {
+                _iterationsSinceLastNarrow++;
+                var randomTileType = RandomlySelectNonNarrowDeepGroundTileType();
+                PlaceDeepGroundTile(randomTileType);
+            }
+
+            RandomlyIncrementXGenerationPosition();
+            IncrementYGenerationPosition();
         }
     }
 
     private DeepGroundTileType RandomlySelectDeepGroundTileType()
     {
-        var values = System.Enum.GetValues(typeof(DeepGroundTileType));
-        var randomEnumValue = UnityEngine.Random.Range(0, values.Length);
+        int[] values = { 0, 0, 0, 0, 0, 2, 2, 2, 2, 3, 3, 3, 1, 1 };
+        var randomEnumValue = Random.Range(0, values.Length);
+        return (DeepGroundTileType)values.GetValue(randomEnumValue);
+    }
+
+    private DeepGroundTileType RandomlySelectNonNarrowDeepGroundTileType()
+    {
+        int[] values = { 0, 0, 0, 0, 0, 2, 2, 2, 2, 3, 3, 3 };
+        var randomEnumValue = Random.Range(0, values.Length);
         return (DeepGroundTileType)values.GetValue(randomEnumValue);
     }
 
@@ -69,8 +95,15 @@ public class Ground : MonoBehaviour
         Instantiate(DeepGroundPrefabDictionary[deepGroundTileType], new Vector2(_xGenerationPosition, _yGenerationPosition), Quaternion.identity, DeepGroundTileParent);
     }
 
-    private void IncrementYGenerationDepth()
+    private void IncrementYGenerationPosition()
     {
         _yGenerationPosition -= DeepGroundTileHeight;
+    }
+
+    private void RandomlyIncrementXGenerationPosition()
+    {
+        var xDelta = ((float)Random.Range(0, 2) * 2f) - 1f;
+        _xGenerationPosition += (XIncrementSize * xDelta);
+        _xGenerationPosition = Mathf.Clamp(_xGenerationPosition, MinX, MaxX);
     }
 }

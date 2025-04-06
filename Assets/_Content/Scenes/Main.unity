@@ -282,7 +282,11 @@ MonoBehaviour:
   ExtraWideWidthDeepGround: {fileID: 3654268258870501994, guid: 2cb6dc47830abc24baf2f5f4a88320dd, type: 3}
   DeepGroundTileHeight: 1.775
   StartYGenerationPosition: -3.625
-  NumDeepGroundLayers: 100
+  XIncrementSize: 1.5
+  NumDeepGroundLayers: 200
+  IterationsBetweenNarrows: 3
+  MinX: -30
+  MaxX: 30
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,7 +1029,7 @@ MonoBehaviour:
   DescendSpeed: 2
   AscendSpeed: 1
   MaxAnchorPlacementSpeed: 2
-  MinAnchorPlacementDistance: 3
+  MinAnchorPlacementDistance: 2
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 256
