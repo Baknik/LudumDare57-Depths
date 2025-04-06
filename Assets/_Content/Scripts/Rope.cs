@@ -45,26 +45,8 @@ public class Rope : MonoBehaviour
 
     void Update()
     {
+        // Update line renderer of active segment
         ActiveRopeSegment.UpdateEndpoints();
-    }
-
-    void FixedUpdate()
-    {
-        // Rope intersects corner, while moving towards corner
-        var activeSegmentDirectionNormalized = GetActiveSegmentDirectionNormalized();
-        var midRopeRaycastHit = Physics2D.Raycast((Vector2)ActiveRopeSegment.StartAttachmentPoint.transform.position + activeSegmentDirectionNormalized, activeSegmentDirectionNormalized, SpelunkerAttachmentPoint.DistanceJoint2D.distance - 1, RopeBendCornerLayerMask);
-        if (midRopeRaycastHit.collider != null)
-        {
-            var ropeBendCorner = midRopeRaycastHit.collider.gameObject.GetComponent<RopeBendCorner>();
-            if (ropeBendCorner != null)
-            {
-                var isRopeMovingTowardsRopeBendCorner = (SpelunkerRigidbody2D.velocity.x * ropeBendCorner.OutDirection.x) < 0f;
-                if (isRopeMovingTowardsRopeBendCorner)
-                {
-                    AddNewRopeBendAttachmentPoint(midRopeRaycastHit.point, ropeBendCorner);
-                }
-            }
-        }
 
         // Active segment lines up with previous segment across a rope bend attachment
         if (_ropeSegments.Count > 1 &&
@@ -83,6 +65,25 @@ public class Rope : MonoBehaviour
                 if (lastThreeAttachmentPointsCollinear)
                 {
                     CombineLastTwoRopeSegments();
+                }
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // Rope intersects corner, while moving towards corner
+        var activeSegmentDirectionNormalized = GetActiveSegmentDirectionNormalized();
+        var midRopeRaycastHit = Physics2D.Raycast((Vector2)ActiveRopeSegment.StartAttachmentPoint.transform.position + activeSegmentDirectionNormalized, activeSegmentDirectionNormalized, SpelunkerAttachmentPoint.DistanceJoint2D.distance - 1, RopeBendCornerLayerMask);
+        if (midRopeRaycastHit.collider != null)
+        {
+            var ropeBendCorner = midRopeRaycastHit.collider.gameObject.GetComponent<RopeBendCorner>();
+            if (ropeBendCorner != null)
+            {
+                var isRopeMovingTowardsRopeBendCorner = (SpelunkerRigidbody2D.velocity.x * ropeBendCorner.OutDirection.x) < 0f;
+                if (isRopeMovingTowardsRopeBendCorner)
+                {
+                    AddNewRopeBendAttachmentPoint(midRopeRaycastHit.point, ropeBendCorner);
                 }
             }
         }
