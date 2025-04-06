@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
@@ -27,6 +28,18 @@ public class Spelunker : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _circleCollider2D = GetComponent<CircleCollider2D>();
         _spelunkerAttachmentPoint = GetComponent<SpelunkerAttachmentPoint>();
+    }
+
+    private void OnEnable()
+    {
+        Rope.RopeSegmentAddedEvent += RopeSegmentAddedHandler;
+        Rope.LastRopeSegmentRemovedEvent += LastRopeSegmentRemovedHandler;
+    }
+
+    private void OnDisable()
+    {
+        Rope.RopeSegmentAddedEvent -= RopeSegmentAddedHandler;
+        Rope.LastRopeSegmentRemovedEvent -= LastRopeSegmentRemovedHandler;
     }
 
     void Start()
@@ -70,7 +83,7 @@ public class Spelunker : MonoBehaviour
         _rigidbody2D.AddForce(_swingForceInput * SwingForce * Time.fixedDeltaTime, ForceMode2D.Force);
 
         var currentDistance = _spelunkerAttachmentPoint.DistanceJoint2D.distance;
-        var activeRopeDirectionNormalized = (Rope.ActiveRopeSegment.EndAttachmentPoint.transform.position - Rope.ActiveRopeSegment.StartAttachmentPoint.transform.position).normalized;
+        var activeRopeDirectionNormalized = Rope.GetActiveSegmentDirectionNormalized();
         if (_targetDistance > currentDistance)
         {
             var groundCastTowardsDistanceChange = Physics2D.CircleCast(_circleCollider2D.bounds.center, _circleCollider2D.radius, activeRopeDirectionNormalized, 0.1f, GroundLayerMask);
@@ -78,10 +91,7 @@ public class Spelunker : MonoBehaviour
             {
                 _spelunkerAttachmentPoint.DistanceJoint2D.distance = Mathf.Lerp(currentDistance, _targetDistance, Time.fixedDeltaTime * DescendSpeed);
             }
-            else
-            {
-                _targetDistance = currentDistance;
-            }
+            _targetDistance = currentDistance;
         }
         else if (_targetDistance < currentDistance)
         {
@@ -90,10 +100,19 @@ public class Spelunker : MonoBehaviour
             {
                 _spelunkerAttachmentPoint.DistanceJoint2D.distance = Mathf.Lerp(currentDistance, _targetDistance, Time.fixedDeltaTime * AscendSpeed);
             }
-            else
-            {
-                _targetDistance = currentDistance;
-            }
+            _targetDistance = currentDistance;
         }
+    }
+
+    private void RopeSegmentAddedHandler(RopeSegment ropeSegment)
+    {
+        var currentDistance = _spelunkerAttachmentPoint.DistanceJoint2D.distance;
+        _targetDistance = currentDistance;
+    }
+
+    private void LastRopeSegmentRemovedHandler()
+    {
+        var currentDistance = _spelunkerAttachmentPoint.DistanceJoint2D.distance;
+        _targetDistance = currentDistance;
     }
 }

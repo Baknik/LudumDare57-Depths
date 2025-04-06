@@ -12,7 +12,7 @@ public class RopeSegment : MonoBehaviour
 
     private LineRenderer _lineRenderer;
 
-    private void Awake()
+    void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
     }
