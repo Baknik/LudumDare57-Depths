@@ -6,6 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(SpelunkerAttachmentPoint))]
 public class Spelunker : MonoBehaviour
 {
+    public delegate void SpelunkerTookDamageHandler(int damage, int currentHealth);
+    public static event SpelunkerTookDamageHandler SpelunkerTookDamageEvent;
+
+    public delegate void SpelunkerDeathHandler();
+    public static event SpelunkerDeathHandler SpelunkerDeathEvent;
+
     [Header("Scene References")]
     public Rope Rope;
     [Header("Settings")]
@@ -16,12 +22,16 @@ public class Spelunker : MonoBehaviour
     public float MinAnchorPlacementDistance;
     public LayerMask GroundLayerMask;
     public float MinDistanceFromGroundToTouch;
+    public int MaxHealth;
+    public float ImpactDamageMultiplier;
+    public float MinSpeedForImpactDamage;
 
     private Rigidbody2D _rigidbody2D;
     private CircleCollider2D _circleCollider2D;
     private SpelunkerAttachmentPoint _spelunkerAttachmentPoint;
     private Vector2 _swingForceInput;
     private float _targetDistance;
+    private int _health;
 
     void Awake()
     {
@@ -44,6 +54,8 @@ public class Spelunker : MonoBehaviour
 
     void Start()
     {
+        _health = MaxHealth;
+
         _targetDistance = _spelunkerAttachmentPoint.DistanceJoint2D.distance;
     }
 
@@ -101,6 +113,33 @@ public class Spelunker : MonoBehaviour
                 _spelunkerAttachmentPoint.DistanceJoint2D.distance = Mathf.Lerp(currentDistance, _targetDistance, Time.fixedDeltaTime * AscendSpeed);
             }
             _targetDistance = currentDistance;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            var impactSpeed = collision.relativeVelocity.magnitude;
+            if (impactSpeed >= MinSpeedForImpactDamage)
+            {
+                var impactDamage = Mathf.RoundToInt(impactSpeed * ImpactDamageMultiplier);
+                _health -= impactDamage;
+                _health = Math.Clamp(_health, 0, MaxHealth);
+
+                if (SpelunkerTookDamageEvent != null)
+                {
+                    SpelunkerTookDamageEvent(impactDamage, _health);
+                }
+
+                if (_health <= 0)
+                {
+                    if (SpelunkerDeathEvent != null)
+                    {
+                        SpelunkerDeathEvent();
+                    }
+                }
+            }
         }
     }
 

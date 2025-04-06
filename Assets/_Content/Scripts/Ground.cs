@@ -16,10 +16,11 @@ public class Ground : MonoBehaviour
     public Transform DeepGroundTileParent;
 
     [Header("Prefabs")]
-    public Transform NarrowWidthDeepGround;
-    public Transform NormalWidthDeepGround;
-    public Transform WideWidthDeepGround;
-    public Transform ExtraWideWidthDeepGround;
+    public Transform NarrowWidthDeepGroundPrefab;
+    public Transform NormalWidthDeepGroundPrefab;
+    public Transform WideWidthDeepGroundPrefab;
+    public Transform ExtraWideWidthDeepGroundPrefab;
+    public GoalCavern GoalCavernPrefab;
 
     [Header("Settings")]
     public float DeepGroundTileHeight;
@@ -42,10 +43,10 @@ public class Ground : MonoBehaviour
         _iterationsSinceLastNarrow = 0;
 
         DeepGroundPrefabDictionary = new Dictionary<DeepGroundTileType, Transform>();
-        DeepGroundPrefabDictionary[DeepGroundTileType.Narrow] = NarrowWidthDeepGround;
-        DeepGroundPrefabDictionary[DeepGroundTileType.Normal] = NormalWidthDeepGround;
-        DeepGroundPrefabDictionary[DeepGroundTileType.Wide] = WideWidthDeepGround;
-        DeepGroundPrefabDictionary[DeepGroundTileType.ExtraWide] = ExtraWideWidthDeepGround;
+        DeepGroundPrefabDictionary[DeepGroundTileType.Narrow] = NarrowWidthDeepGroundPrefab;
+        DeepGroundPrefabDictionary[DeepGroundTileType.Normal] = NormalWidthDeepGroundPrefab;
+        DeepGroundPrefabDictionary[DeepGroundTileType.Wide] = WideWidthDeepGroundPrefab;
+        DeepGroundPrefabDictionary[DeepGroundTileType.ExtraWide] = ExtraWideWidthDeepGroundPrefab;
 
         GenerateDeepGround();
     }
@@ -56,7 +57,7 @@ public class Ground : MonoBehaviour
         RandomlyIncrementXGenerationPosition();
         IncrementYGenerationPosition();
 
-        for (int i=0; i<NumDeepGroundLayers - 1; i++)
+        for (int i = 0; i < NumDeepGroundLayers - 1; i++)
         {
             if (_iterationsSinceLastNarrow >= IterationsBetweenNarrows)
             {
@@ -74,6 +75,8 @@ public class Ground : MonoBehaviour
             RandomlyIncrementXGenerationPosition();
             IncrementYGenerationPosition();
         }
+
+        PlaceGoalCavern();
     }
 
     private DeepGroundTileType RandomlySelectDeepGroundTileType()
@@ -93,6 +96,11 @@ public class Ground : MonoBehaviour
     private void PlaceDeepGroundTile(DeepGroundTileType deepGroundTileType)
     {
         Instantiate(DeepGroundPrefabDictionary[deepGroundTileType], new Vector2(_xGenerationPosition, _yGenerationPosition), Quaternion.identity, DeepGroundTileParent);
+    }
+
+    private void PlaceGoalCavern()
+    {
+        Instantiate(GoalCavernPrefab, new Vector2(_xGenerationPosition, _yGenerationPosition), Quaternion.identity, DeepGroundTileParent);
     }
 
     private void IncrementYGenerationPosition()

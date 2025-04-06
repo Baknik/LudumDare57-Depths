@@ -47,7 +47,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3730230842977394385, guid: 7f64c92451e1ebc4d824a2a7bc56318a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3730230842977394385, guid: 7f64c92451e1ebc4d824a2a7bc56318a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -85,6 +85,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6341940727619183102, guid: 7f64c92451e1ebc4d824a2a7bc56318a, type: 3}
+      propertyPath: m_Size.x
+      value: 23.289999
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341940727619183102, guid: 7f64c92451e1ebc4d824a2a7bc56318a, type: 3}
+      propertyPath: m_Size.y
+      value: 1.785415
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341940727619183102, guid: 7f64c92451e1ebc4d824a2a7bc56318a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6341940727619183102, guid: 7f64c92451e1ebc4d824a2a7bc56318a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.8927075
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -107,9 +123,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Deep Ground Left
       objectReference: {fileID: 0}
+    - target: {fileID: 7631665086791400994, guid: 825699a085c781a42b54e2a41dbf5735, type: 3}
+      propertyPath: m_Size.x
+      value: 23.289999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631665086791400994, guid: 825699a085c781a42b54e2a41dbf5735, type: 3}
+      propertyPath: m_Size.y
+      value: 1.785415
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631665086791400994, guid: 825699a085c781a42b54e2a41dbf5735, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631665086791400994, guid: 825699a085c781a42b54e2a41dbf5735, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.8927075
+      objectReference: {fileID: 0}
     - target: {fileID: 7649643427089827304, guid: 825699a085c781a42b54e2a41dbf5735, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 7649643427089827304, guid: 825699a085c781a42b54e2a41dbf5735, type: 3}
       propertyPath: m_LocalPosition.y

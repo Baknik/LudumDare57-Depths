@@ -15,7 +15,7 @@ TagManager:
   - Spelunker
   - Ground
   - Rope Bend Corner
-  - 
+  - Trigger
   - 
   - 
   - 
@@ -38,17 +38,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
   - name: Sky
     uniqueID: 2856890945
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Back Ground
+    uniqueID: 865253795
+    locked: 0
+  - name: Top Ground
+    uniqueID: 3004278527
     locked: 0
   - name: Grass
     uniqueID: 1351754009
     locked: 0
-  - name: Back Ground
-    uniqueID: 865253795
+  - name: Treasure
+    uniqueID: 24186045
+    locked: 0
+  - name: Attachment Point
+    uniqueID: 651000475
     locked: 0
   - name: Rope
     uniqueID: 3748487035
@@ -56,12 +65,9 @@ TagManager:
   - name: Spelunker
     uniqueID: 3354306725
     locked: 0
-  - name: Attachment Point
-    uniqueID: 651000475
-    locked: 0
   - name: Deep Ground
     uniqueID: 1358849165
     locked: 0
-  - name: Top Ground
-    uniqueID: 3004278527
+  - name: UI
+    uniqueID: 443918473
     locked: 0
