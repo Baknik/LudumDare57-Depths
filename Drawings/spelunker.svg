@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg20643"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="spelunker.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview20645"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.2938725"
+     inkscape:cx="641.8716"
+     inkscape:cy="316.87821"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs20640" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path20816"
+       style="fill:#e9c6af;stroke-width:0.230406;stroke-linecap:round;stroke-dasharray:0.230406, 0.460811"
+       d="m 113.99528,88.915636 c -1.24431,9.301017 -7.04686,14.468464 -15.156194,9.746653 -8.301329,-4.833614 -12.281924,-10.443591 -11.237039,-17.606726 1.35449,-9.285606 7.603051,-13.700928 16.904053,-12.456611 9.30102,1.244315 10.7335,11.015673 9.48918,20.316684 z"
+       sodipodi:nodetypes="sssss" />
+    <path
+       id="circle20818"
+       style="fill:#e9c6af;stroke-width:0.391401;stroke-linecap:round;stroke-dasharray:0.391401, 0.782803"
+       d="m 119.97951,146.26265 c 15.03133,5.14992 14.84805,5.37417 17.61093,9.67758 2.60869,4.06325 7.34093,18.06952 2.2566,18.54565 -11.1794,1.04691 -5.76607,-11.99743 -17.96298,-13.72182 -11.1744,-1.57982 -13.85123,-1.70908 -24.94263,-0.87831 -14.197828,1.06345 -10.912369,-32.30765 -9.929792,-41.30434 0.816748,-7.47832 2.9129,-17.36429 16.808212,-17.36428 6.94766,1e-5 12.13219,9.98981 10.42367,19.07295 -2.62314,13.94561 -5.80993,22.01679 5.73599,25.97257 z"
+       sodipodi:nodetypes="sssssssss" />
+    <ellipse
+       style="fill:#e9c6af;stroke-width:0.153396;stroke-linecap:round;stroke-dasharray:0.153396, 0.306791"
+       id="path20873"
+       cx="213.90453"
+       cy="-46.968056"
+       rx="4.2507806"
+       ry="9.0274115"
+       transform="matrix(0.46599934,0.88478507,-0.90522018,0.42494284,0,0)" />
+    <ellipse
+       style="fill:#e9c6af;stroke-width:0.2;stroke-linecap:round;stroke-dasharray:0.2, 0.4"
+       id="path20876"
+       cx="102.96046"
+       cy="100.71108"
+       rx="5.3167267"
+       ry="10.633453" />
+    <circle
+       style="fill:#e9c6af;stroke-width:0.2;stroke-linecap:round;stroke-dasharray:0.2, 0.4"
+       id="path20878"
+       cx="167.06792"
+       cy="65.232147"
+       r="24.334249"
+       inkscape:export-filename="..\Assets\_Content\Sprites\spelunker.png"
+       inkscape:export-xdpi="52.189804"
+       inkscape:export-ydpi="52.189804" />
+  </g>
+</svg>
